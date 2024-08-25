@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check50 Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0f7fa;
+            border: 1px solid #00897b;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Check50 Results</h1>
+    <p id="status">Waiting for results...</p>
+    <div id="result"></div>
+
+    <script>
+        async function receivePostData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const checkName = urlParams.get('check_name');
+            const status = urlParams.get('status');
+            const message = urlParams.get('message');
+
+            if (checkName && status && message) {
+                document.getElementById('status').innerText = `Received result for: ${checkName}`;
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<strong>Status:</strong> ${status}<br><strong>Message:</strong> ${message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        receivePostData();
+    </script>
+
+</body>
+</html>
